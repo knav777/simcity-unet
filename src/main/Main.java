@@ -1,19 +1,8 @@
-/**
- * 
- */
 package main;
 
-/**
- * @author knav777
- *
- */
 public class Main {
+    public static void main(String[] args) {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		System.out.println("hello");
-	}
-
+        System.out.println("Hello world!");
+    }
 }
