@@ -1,12 +1,11 @@
 package edificio;
 
 public class Edificio {
-    private float costo_inicial;
-    private float costo_final;
+    protected float costo_inicial;
+    protected float costo_final;
 
-    public Edificio(float costo_inicial, float costo_final) {
-        this.costo_inicial = costo_inicial;
-        this.costo_final = costo_final;
+    public Edificio() {
+
     }
 
     // Getters y setters para los atributos
