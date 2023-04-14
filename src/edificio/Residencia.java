@@ -7,10 +7,11 @@ public class Residencia extends Edificio {
     private float tiempo_generar;
 
     // Constructor
-    public Residencia(float costo_inicial, float costo_final, int poblacion, int felicidad, float dinero_generar, float tiempo_generar) {
-        super(costo_inicial, costo_final);
-        this.poblacion = poblacion;
-        this.felicidad = felicidad;
+    public Residencia() {
+        this.costo_inicial = 1000;
+        this.costo_final = 5000;
+        this.poblacion = 5;
+        this.felicidad = 5;
         this.dinero_generar = dinero_generar;
         this.tiempo_generar = tiempo_generar;
     }
