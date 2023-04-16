@@ -4,11 +4,11 @@ public class Fabrica extends Edificio {
     private String material_actual;
     private int tiempo_material;
 
-    public Fabrica(String material_actual,int tiempo_material ) {
-        this.costo_inicial = 1000;
-        this.costo_final = 5000;
-        this.material_actual = material_actual;
-        this.tiempo_material = tiempo_material;
+    public Fabrica( ) {
+        this.costo_inicial = 2000;
+        this.costo_final = 1000;
+//        this.material_actual = material_actual;
+//        this.tiempo_material = tiempo_material;
     }
 
     public String getMaterialActual() {
