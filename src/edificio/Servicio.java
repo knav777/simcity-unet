@@ -5,9 +5,10 @@ public class Servicio extends Edificio {
     private String tipo_servicio;
 
     public Servicio(String tipo_servicio) {
-        this.costo_inicial = 1000;
-        this.costo_final = 5000;
+        this.costo_inicial = 3000;
+        this.costo_final = 1500;
         this.capacidad = 5;
+        this.happiness = 5;
         this.tipo_servicio = tipo_servicio;
     }
 

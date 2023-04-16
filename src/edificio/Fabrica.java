@@ -3,12 +3,15 @@ package edificio;
 public class Fabrica extends Edificio {
     private String material_actual;
     private int tiempo_material;
-
-    public Fabrica(String material_actual,int tiempo_material ) {
-        this.costo_inicial = 1000;
-        this.costo_final = 5000;
-        this.material_actual = material_actual;
-        this.tiempo_material = tiempo_material;
+    private int time_to_generate;
+    public Fabrica( ) {
+        this.costo_inicial = 2000;
+        this.costo_final = 1000;
+        this.happiness = -5;
+        this.time_to_generate = 20;
+        this.money_to_generate = 83;
+//        this.material_actual = material_actual;
+//        this.tiempo_material = tiempo_material;
     }
 
     public String getMaterialActual() {
@@ -29,6 +32,12 @@ public class Fabrica extends Edificio {
 
     public void Recoger_material() {
         // implementación del método Recoger_material()
+    }
+
+
+
+    public void setTime_to_generate(int tiempo_generar) {
+        this.time_to_generate = time_to_generate;
     }
 
     public void producirMaterial(int cantidad) {
