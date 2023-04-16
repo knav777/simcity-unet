@@ -1,7 +1,8 @@
 package main;
 
 public class Map {
-    static int[][] map =  { { 0, 0, 0,0,0 }, { 0, 0, 0,0,0 }, {0, 0, 0,0,0  },{0, 0, 0,0,0  },{0, 0, 0,0,0  } };;
+    static int[][] map =  { { 0, 0, 0,0,0 }, { 0, 0, 0,0,0 }, {0, 0, 0,0,0  },{0, 0, 0,0,0  },{0, 0, 0,0,0  } };
+    static int[][] parallel_map =  { { 0, 0, 0,0,0 }, { 0, 0, 0,0,0 }, {0, 0, 0,0,0  },{0, 0, 0,0,0  },{0, 0, 0,0,0  } };
     static final int RESIDENCE_VALUE = 1;
     static final int FACTORY_VALUE = 2;
     static final int SERVICE_VALUE = 3;

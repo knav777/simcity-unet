@@ -8,6 +8,7 @@ public class Servicio extends Edificio {
         this.costo_inicial = 3000;
         this.costo_final = 1500;
         this.capacidad = 5;
+        this.happiness = 5;
         this.tipo_servicio = tipo_servicio;
     }
 
