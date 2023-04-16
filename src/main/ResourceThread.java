@@ -15,8 +15,8 @@ public class ResourceThread extends TimerTask{
 
     private Edificio edificio;
     public static void x(Edificio edificio) {
-        Main.money+=edificio.getMoney_to_generate();
-        System.out.println("DINERO"+Main.money);
+        Main.money.setValue(Main.money.getValue()+(int)edificio.getMoney_to_generate());
+        System.out.println("DINERO"+Main.money.getValue());
     }
     public  ResourceThread(int map_value){
         Edificio edificio= null;
