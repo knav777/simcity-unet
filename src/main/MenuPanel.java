@@ -5,13 +5,21 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Observable;
+import java.util.Observer;
 
-class MenuPanel extends JPanel implements MouseListener {
+class MenuPanel extends JPanel implements MouseListener, Observer {
 
     private String option;
 
     Observ _opt = new Observ();
-    JLabel label6;
+    JLabel money;
+    JLabel happiness;
+    JLabel population;
+    JLabel level;
+    JLabel message;
+
+
 
     public MenuPanel() {
 
@@ -41,6 +49,22 @@ class MenuPanel extends JPanel implements MouseListener {
         Button electric = new Button("", "Electricidad");
         electric.addMouseListener(this);
 
+        JLabel label6 = new JLabel("__________");
+
+        JLabel label7 = new JLabel(Main.info);
+
+        money = new JLabel("Dinero: " + Main.money.getValue()+"");
+        level = new JLabel("Nivel: "+Main.level.getValue()+"");
+        happiness = new JLabel("Felicidad: " + Main.happiness.getValue()+"");
+        population = new JLabel("Poblacion: "+Main.population.getValue()+"");
+        message = new JLabel(Main.message.getOptionOB());
+
+        Main.money.addObserver(this);
+        Main.level.addObserver(this);
+        Main.happiness.addObserver(this);
+        Main.population.addObserver(this);
+        Main.message.addObserver(this);
+
         add(label1);
         add(label2);
         add(street);
@@ -51,6 +75,14 @@ class MenuPanel extends JPanel implements MouseListener {
         add(label5);
         add(water);
         add(electric);
+        add(label6);
+        add(level);
+        add(money);
+        add(population);
+        add(happiness);
+        add(label6);
+        add(label7);
+        add(message);
 
     }
 
@@ -81,5 +113,15 @@ class MenuPanel extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        money.setText("Dinero: "+Main.money.getValue()+"");
+        population.setText("Poblacion: "+Main.population.getValue()+"");
+        happiness.setText("Felicidad: "+Main.happiness.getValue()+"");
+        level.setText("Nivel: "+Main.level.getValue()+"");
+        message.setText(Main.message.getOptionOB());
+        updateUI();
     }
 }

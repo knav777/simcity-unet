@@ -10,4 +10,8 @@ class Observ extends Observable {
         setChanged();
         notifyObservers(value);
     }
+
+    public String getOptionOB() {
+        return optionOB;
+    }
 }
