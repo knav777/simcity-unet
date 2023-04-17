@@ -8,10 +8,8 @@ public class Fabrica extends Edificio {
         this.costo_inicial = 2000;
         this.costo_final = 1000;
         this.happiness = -5;
-        this.time_to_generate = 20;
-        this.money_to_generate = 83;
-//        this.material_actual = material_actual;
-//        this.tiempo_material = tiempo_material;
+        this.time_to_generate = 10;
+        this.money_to_generate = 200;
     }
 
     public String getMaterialActual() {

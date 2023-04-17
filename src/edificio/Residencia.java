@@ -14,7 +14,7 @@ public class Residencia extends Edificio {
         this.happiness = 5;
         this.population = 5;
         this.money_to_generate = 50;
-        this.time_to_generate = 10;
+        this.time_to_generate = 20;
     }
 
     // Métodos get y set para poblacion
