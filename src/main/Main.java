@@ -5,15 +5,8 @@ import edificio.Residencia;
 import edificio.Servicio;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Observable;
-import java.util.Observer;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main{
     static int i, j;
@@ -22,9 +15,9 @@ public class Main{
     static ObservableValues money = new ObservableValues(100);
     static ObservableValues level = new ObservableValues(0);
 
-    static Observ message = new Observ();
+    static Observ message = new Observ("");
 
-    static String info = "<html>Para empezar a construir la ciudad, <br>primero debes empezar <br>con una carretera. Fíjate en los <br>indices de felicidad, <br>dinero y población.</html>";
+    static Observ info = new Observ("<html>Inicie construyendo <br>una carretera para<br>subir al nivel 1</html>");
 
     static boolean validated = true;
 
@@ -43,18 +36,19 @@ public class Main{
     public boolean validations(float initial_cost, int map_value, int i, int j) {
         if (Map.map[this.i][this.j] != 0) {
 
-            message.setOptionOB("<html>NO PUEDES CONSTRUIR EN <br>ESTE ESPACIO, YA ESTA EN USO.</html>");
+            message.setOptionOB("<html>NO PUEDES CONSTRUIR,<br>ESPACIO OCUPADO.</html>");
             return false;
 
         }
         if (Main.money.getValue() - initial_cost < 0) {
 
-            message.setOptionOB("<html>NO PUEDES  CONSTRUIR, <br>FONDOS INSUFICIENTES.</html>");
+            message.setOptionOB("<html>NO PUEDES CONSTRUIR, <br>FONDOS INSUFICIENTES.</html>");
             return false;
 
         }
 
         if (map_value != Map.ROAD_VALUE && !this.mapRoadValidate(i, j)) {
+            message.setOptionOB("<html>NO PUEDES CONSTRUIR,<br>DEBE ESTAR ADYACENTE A LA CARRETERA.</html>");
             return false;
         }
 
@@ -87,24 +81,25 @@ public class Main{
         switch (option) {
             case Map.RESIDENCE_IMG:
                 if (Main.level.getValue() == 1) {
+                    info.setOptionOB("<html>HAS SUBIDO DE NIVEL<br>Ahora construye una fábrica<br>para subir de nivel</html>");
                     Main.level.setValue(Main.level.getValue()+1);
-                    Main.happiness.setValue(Main.happiness.getValue() - 10);
                     Main.money.setValue(Main.money.getValue() + 3500);
-                    //Main.happiness -= 10;
-                    //Main.money += 3500;
-
+                    Main.happiness.setValue(Main.happiness.getValue() - 10);
                 }
                 ResourceThread hilo = new ResourceThread(1);
                 Timer timer = new Timer();
+
+                if(Main.happiness.getValue()<=95) {
+                    Main.happiness.setValue(Main.happiness.getValue() + 5);
+                }
+
+                Main.population.setValue(Main.population.getValue() + 5);
 
                 timer.schedule(new ResourceThread(1), 0, 10000); // llamar a la tarea cada 60 segundos
                 break;
             case Map.FACTORY_IMG:
                 if (Main.level.getValue() == 2) {
-                    //Main.level++;
-                    //Main.happiness -= 10;
-                    //Main.money += 4000;
-
+                    info.setOptionOB("<html>HAS SUBIDO DE NIVEL<br>Ahora construye un servicio publico<br>para subir de nivel</html>");
                     Main.level.setValue(Main.level.getValue()+1);
                     Main.happiness.setValue(Main.happiness.getValue() - 10);
                     Main.money.setValue(Main.money.getValue() + 4000);
@@ -115,42 +110,44 @@ public class Main{
                 break;
 
             // Puedes agregar más casos aquí
-            case Map.ELECTRICITY_IMG:
-                if (Main.level.getValue() == 3) {
-                    //Main.level++;
-                    //Main.happiness -= 10;
-                    //Main.money += 4000;
-
-                    Main.level.setValue(Main.level.getValue()+1);
-                    Main.happiness.setValue(Main.happiness.getValue() - 10);
-                    Main.money.setValue(Main.money.getValue() + 4000);
-                }
-                break;
             case Map.WATER_IMG:
                 if (Main.level.getValue() == 3) {
-                    //Main.level++;
-                    //Main.happiness -= 10;
-
+                    info.setOptionOB("<html>HAS TERMINADO EL TUTORIAL<br>Sigue disfrutando del juego.</html>");
                     Main.level.setValue(Main.level.getValue()+1);
-                    Main.happiness.setValue(Main.happiness.getValue() - 10);
+                    Main.money.setValue(Main.money.getValue() + 4000);
+                }
+                if(Main.happiness.getValue()<=90) {
+                    Main.happiness.setValue(Main.happiness.getValue() + 10);
+                } else {
+                    Main.happiness.setValue(100);
                 }
                 break;
+
+            case Map.ELECTRICITY_IMG:
+                if (Main.level.getValue() == 3) {
+                    info.setOptionOB("<html>HAS TERMINADO EL TUTORIAL<br>Sigue disfrutando del juego</html>");
+                    Main.level.setValue(Main.level.getValue()+1);
+                    Main.money.setValue(Main.money.getValue() + 4000);
+                }
+                if(Main.happiness.getValue()<=90) {
+                    Main.happiness.setValue(Main.happiness.getValue() + 10);
+                } else {
+                    Main.happiness.setValue(100);
+                }
+                break;
+
             case Map.ROAD_IMG:
                 if (Main.level.getValue() == 0) {
-                    //Main.level++;
-                    //Main.happiness -= 10;
-                    //Main.money += 1000;
-
-                    Main.level.setValue(Main.level.getValue()+1);
-                    Main.happiness.setValue(Main.happiness.getValue() - 10);
+                    info.setOptionOB("<html>HAS SUBIDO DE NIVEL <br> Ahora construye una residencia<br>para subir de nivel</html>");
+                    Main.level.setValue(Main.level.getValue() + 1);
                     Main.money.setValue(Main.money.getValue() + 1000);
+                    Main.happiness.setValue(Main.happiness.getValue() - 10);
                 }
 
                 break;
 
         }
     }
-
 
     public void mouseClicked(String option) {
         Main.validated = true;
@@ -209,15 +206,16 @@ public class Main{
         //Main.happiness += aux_happiness;
         this.levels(option);
 
+        message.setOptionOB("");
 
-        Main.happiness.setValue(Main.happiness.getValue() - 10);
-        Main.money.setValue(Main.money.getValue() + - (int)initial_cost);
+        //Main.happiness.setValue(Main.happiness.getValue() - 10);
+        Main.money.setValue(Main.money.getValue() - (int)initial_cost);
 
 
-        System.out.println("'DINERO'" + Main.money.getValue());
-        System.out.println("'FELICIDAD'" + Main.happiness.getValue());
-        System.out.println("'POBLACION'" + Main.population.getValue());
-        System.out.println("'LEVEL'" + Main.level.getValue());
+        System.out.println("'DINERO: '" + Main.money.getValue());
+        System.out.println("'FELICIDAD: '" + Main.happiness.getValue());
+        System.out.println("'POBLACION: '" + Main.population.getValue());
+        System.out.println("'LEVEL: '" + Main.level.getValue());
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {

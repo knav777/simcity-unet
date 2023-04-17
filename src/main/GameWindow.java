@@ -20,8 +20,7 @@ class GameWindow extends JFrame implements Observer {
         Dimension sizeScreen = screen.getScreenSize();
         int h = sizeScreen.height;
         int w = sizeScreen.width;
-        setSize(w - 150, h - 100);
-        setLocation(75, 30);
+        setSize(w, h);
         setTitle("SimCity - Proyecto simulación");
         Image icon = screen.getImage("./src/assets/icon.png");
         setIconImage(icon);

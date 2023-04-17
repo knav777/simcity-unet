@@ -17,6 +17,7 @@ class Label extends JLabel {
         setName("" + this.i + this.j);
         setBackground(new Color(117, 117, 117));
         setOpaque(true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     public boolean isEmpty() {
@@ -37,6 +38,11 @@ class Label extends JLabel {
 
     public void setBG(String path) {
         this.icon = new ImageIcon(path);
-        this.setIcon(this.icon);
+
+        Image imagen = icon.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+
+        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
+        this.setIcon(iconoEscalado);
     }
 }
